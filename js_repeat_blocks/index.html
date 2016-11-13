@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Repeat Blocks</title>
+    <script>
+        var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        console.log('Ascending');
+        for (i=0; i<10; i++) {
+            console.log(numbers[i]);
+        }
+        console.log('Descending');
+        for (i=9; i>=0; i--) {
+            console.log(numbers[i]);
+        }
+        console.log('Odd only');
+        for (i=0; i<10; i++) {
+            if (numbers[i] % 2 !== 0) {
+                console.log(numbers[i]);
+            }
+        }
+        console.log('Odd only, harder array');
+        var mixedArray = [4, 56, 11, 13, 97, 22, 7, 36, 19, 5, 8, 10];
+        for (i=0; i<10; i++) {
+            if (mixedArray[i] % 2 !== 0) {
+                console.log(mixedArray[i]);
+            }
+        }
+        console.log('Who sits where');
+        var classRoom = {desk1: 'Stu', desk2: 'Peggy', desk3: 'LoneStar', desk4: 'George', desk5: 'Sheldon'};
+        var x;
+        for (x in classRoom) {
+            console.log(classRoom[x]+" is at "+x);
+        }
+        // For whoever is grading this, the array below has TWO typos in the instructions. A leading single quote and the last comma was actually a period.
+        var studentArray = [{name: "Bob", grade: 87}, {name: "Fred", grade: 82}, {name: "George", grade: 93}, {name: "Robert", grade: 85}];
+        function findStudent(name) {
+            for (i=0; i<studentArray.length; i++) {
+                if (name==studentArray[i].name) {
+                    return('Found ' + studentArray[i].name+' their grade is ' + studentArray[i].grade);
+                }
+            }
+        return('Student ' + name + ' not found.');
+        }
+        console.log("Test 1:", findStudent("George"));
+        console.log("Test 2:", findStudent("Fred"));
+        console.log("Test 3:", findStudent("Hank"));
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
