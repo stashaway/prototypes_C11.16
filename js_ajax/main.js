@@ -20,6 +20,14 @@ $(document).ready(function(){
                     var the_element_title=$('<p>').text(title_director);
                     the_element.appendTo($('#main'));
                     the_element_title.appendTo($('#main'));
+
+                    // Here's a way to do it all in one statement...
+                    // $('#main').append(
+                    //     $('<img>',{src: best_pic}),
+                    //     $('<p>', {text: title_director})
+                    // );
+
+
                 }
 
 
