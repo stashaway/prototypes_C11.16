@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
     <meta charset="UTF-8">
     <title>Angular Intro</title>
     <!-- Add Angular CDN below -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 </head>
 <body>
-
+    <div ng-init="myvar='Yo Mama'">
+        {{myvar}}
+    </div>
+    <div ng-init="carArray=['Honda','Chevy','Toyota','Tesla']">
+        <ul>
+            <li ng-repeat="cars in carArray">{{cars}}</li>
+        </ul>
+    </div>
+    <div>
+        <input ng-model="myInput" type="text">
+        <p>{{myInput}}</p>
+    </div>
 </body>
 </html>
