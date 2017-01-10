@@ -2,12 +2,12 @@ var app = angular.module('servicesApp', []);
 app.controller('servicesController', function($http, $log){
     var self=this;
 
-    self.makeQueryString = function(){
-      self.queryString = 'https://itunes.apple.com/search?term='+$("#user_input").val()+'&callback=JSON_CALLBACK';
+    self.makeQueryString = function(theInput){
+      return 'https://itunes.apple.com/search?term='+theInput+'&callback=JSON_CALLBACK';
     };
 
     self.getArtist = function(){
-        self.makeQueryString();
+        self.queryString = self.makeQueryString($("#user_input").val());
         $http({
             url: self.queryString,
             cache: false,
