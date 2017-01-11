@@ -41,7 +41,7 @@ app.config(function(sgtDataProvider){
 });
 
 //Include your service in the function parameter list along with any other services you may want to use
-app.controller('ioController', function(sgtData){
+app.controller('ioController', function($log, sgtData){
     //Create a variable to hold this, DO NOT use the same name you used in your provider
     var contSelf=this;
     //Add an empty data object to your controller, make sure to call it 'data'
