@@ -9,13 +9,12 @@ app.provider('sgtData', function() {
     self.apiURL = '';
 
     //Add the necessary services to the function parameter list
-    this.$get = function ($http, $q, $log) {
+    self.$get = function ($http, $q, $log) {
         //return an object that contains a function to call the API and get the student data
         //Refer to the prototype instructions for more help
         return {
             call_api: function () {
-                // var data = "api_key=" + self.api_key;
-                var data = "api_key=A7wkk0VAdH";
+                var data = "api_key=" + self.apiKey;
                 var defer = $q.defer();
                 $http({
                     url: self.apiURL,
