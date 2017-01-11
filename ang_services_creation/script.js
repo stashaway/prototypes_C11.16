@@ -2,11 +2,11 @@ var app = angular.module('sgtApp', []);
 
 app.provider('sgtData', function(){
     //Create a variable to hold this
-
+    var self=this;
     //Create a variable to hold your api key but set it to an empty string
-
+    var apiKey = '';
     //Create a variable to hold the API url but set it to an empty string
-
+    var apiURL = '';
 
     //Add the necessary services to the function parameter list
     this.$get = function(){
