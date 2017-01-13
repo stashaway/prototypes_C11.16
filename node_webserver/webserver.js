@@ -2,7 +2,7 @@ var http = require('http');
 var fs = require('fs');
 
 function handleRequest(request,response){
-    console.log('Node console notification - hadnling request');
+    console.log('Node console notification - handling request');
     // response.write('Booyah! You get a fritter, all-star!\n');
     // response.write('Path hit: ' + request.url);
     var file=fs.readFileSync('public/index.html');
