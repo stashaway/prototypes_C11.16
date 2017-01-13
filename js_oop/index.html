@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Objectifications</title>
+    <script>
+        function coin_stack(num_coins) {
+            this.value=num_coins;
+            this.add_coins=function(adder){
+               this.value+=adder;
+            }
+            this.remove_coins=function(subtractor){
+                if (this.value >=subtractor) {
+                    this.value-=subtractor;
+                    return subtractor;
+                } else if (this.value < subtractor) {
+                    var remainder=this.value;
+                    this.value=0;
+                    return remainder;
+                }
+            }
+        }
+        var first_stack=new coin_stack(50);
+        console.log('1st stack has ' + first_stack.value + ' coins.');
+        first_stack.add_coins(15);
+        console.log('Now my stack has ' + first_stack.value + ' coins.');
+        first_stack.remove_coins(37);
+        console.log('Now my stack has ' + first_stack.value + ' coins.');
+        first_stack.remove_coins(55);
+        console.log('Now my stack has ' + first_stack.value + ' coins.');
+
+        coin_stack.prototype.transfer_coins = function(from_where,how_many) {
+            var bounce_check=from_where.remove_coins(how_many);
+            this.add_coins(bounce_check);
+            return how_many;
+        }
+        var erics_coins=new coin_stack(50);
+        var dans_coins=new coin_stack(50);
+        console.log('Eric has '+erics_coins.value+' coins');
+        console.log('Dan has '+dans_coins.value+' coins');
+        erics_coins.transfer_coins(dans_coins,30);
+        console.log('After the transfer..');
+        console.log('Eric has '+erics_coins.value+' coins');
+        console.log('Dan has '+dans_coins.value+' coins');
+        dans_coins.transfer_coins(erics_coins,120);
+        console.log('After the 2nd transfer..');
+        console.log('Eric has '+erics_coins.value+' coins');
+        console.log('Dan has '+dans_coins.value+' coins');
+    </script>
+</head>
+<body>
+<h1>Javascript OOP Prototype</h1>
+</body>
+</html>
