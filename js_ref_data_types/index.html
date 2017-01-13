@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Ref Data Types</title>
+    <script>
+        var student_array=['Sloan','Tammy','Mike','Jason','Miles'];
+        console.log(student_array[2]);
+        console.log(student_array);
+        console.log(student_array.length);
+        student_array.push('Bill','Bob');
+        console.log(student_array.length);
+        console.log(student_array);
+        var student={};
+        student.firstName='Sloan';
+        student.lastName='Tash';
+        student.age=43;
+        student.school='LearningFuze';
+        student.questionList=[];
+        student.hasQuestion=false;
+        student.greeting=function(){
+            return "Hello, my name is "+student.firstName;
+        };
+        student.aboutMe=function() {
+            return "My full name is " + student.firstName + " " + student.lastName + ", I am " + student.age + " years old and I am a student at " + student.school + ".";
+        };
+        student.askQuestion=function(question) {
+            student.questionList.push(question);
+            student.hasQuestion=true;
+            return "A question has been added to your list";
+        }
+        student.answerQuesiton=function() {
+            if (student.hasQuestion) {
+                student.hasQuesiton=false;
+                return student.questionList[student.questionList.length-1];
+            } else {
+                return "You have no pending questions";
+            }
+        }
+        console.log("Greeting " + student.greeting());
+        console.log("aboutMe " + student.aboutMe());
+        console.log("answerQuestion " + student.answerQuesiton());
+        console.log("askQuestion " + student.askQuestion("How many licks?"));
+        console.log("askQuestion " + student.askQuestion("How many roads?"));
+        console.log("askQuestion " + student.askQuestion("How many miles?"));
+        console.log("answerQuestion " + student.answerQuesiton());
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
