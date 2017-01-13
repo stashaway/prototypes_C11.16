@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comparisons and Conditionals</title>
+    <script>
+        var mySmallNumber = 5;
+        var myString = "5";
+        var myBigNumber = 255;
+        var output1 = (mySmallNumber==myString);
+        var output2 = (mySmallNumber===myString);
+        var output3 = (mySmallNumber < myBigNumber);
+        var output4 = (mySmallNumber > myBigNumber);
+        console.log('mySmallNumber is '+mySmallNumber);
+        console.log('myBig Number is '+myBigNumber);
+        console.log('myString is '+myString);
+        console.log('The result of mySmallNumber==myString is '+output1);
+        console.log('The result of mySmallNumber===myString is '+output2);
+        console.log('The result of mySmallNumber < myBigNumber is '+output3);
+        console.log('The result of mySmallNumber > myBigNumber is '+output4);
+        var gameNumber=64;
+        var userInput1=54;
+        var userInput2=64;
+        if (userInput1<gameNumber) {
+            console.log('The number is too low.');
+        }
+        if (userInput2==gameNumber) {
+            console.log ('The correct number has been guessed.');
+        } else {
+            console.log ('Try again!');
+        }
+        switch (userInput1) {
+            case gameNumber:
+                console.log ('You found the correct number!');
+                break;
+            case (gameNumber-10):
+                console.log('Too low but warm');
+                break;
+            case (gameNumber-25):
+                console.log('Too low and cold');
+                break;
+            case (gameNumber+25):
+                console.log('Too high and cold');
+                break;
+            default:
+                console.log('You are way off');
+                break;
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
