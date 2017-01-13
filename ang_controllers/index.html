@@ -4,9 +4,57 @@
     <meta charset="UTF-8">
     <title>Angular Controllers</title>
     <!-- Add the AngularJS CDN below -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 </head>
-<body>
-
+<body ng-app="controllersApp">
+    <div ng-controller="formController as fc">
+        First Name: <input type="text" ng-model="fc.form.fName"><br>
+        Last Name: <input type="text" ng-model="fc.form.lName"><br>
+        email:<input type="text" ng-model="fc.form.email"><br>
+        Comments: <textarea ng-model="fc.form.comments" ng-disabled="fc.exceededCommentLength()"></textarea>
+        <p>Characters remaining: {{ fc.charsRemaining() }}</p>
+        <button ng-click="fc.addFormToArray()">Submit</button>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Comments</th>
+                </tr>
+                <tr ng-repeat="student in fc.formArray">
+                    <td>
+                        {{student.fName}} {{student.lName}}
+                    </td>
+                    <td>
+                        {{student.email}}
+                    </td>
+                    <td>
+                        {{student.comments}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
+<script>
+    var app=angular.module('controllersApp',[]);
+    app.controller('formController', function(){
+        this.form={};
+        this.formArray = [];
+        this.addFormToArray=function(){
+            this.formArray.push(this.form);
+            this.form = {};
+        };
+        this.maxLength = 25;
+        this.charsRemaining = function() {
+            if (this.form.comments != undefined) {
+                return this.maxLength - this.form.comments.length;
+            }
+            return 25;
+        };
+        this.exceededCommentLength = function () {
+            return (this.charsRemaining() <= 0)
+        }
+    })
+</script>
 </html>
