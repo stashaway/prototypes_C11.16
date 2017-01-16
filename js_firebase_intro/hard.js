@@ -1,4 +1,13 @@
-// harder Firbase Intro Prototype js file
+// harder Firebase Intro Prototype js file
+var config = {
+    apiKey: "AIzaSyAMeZujHVrMsSCUdb6Qzuxic_du3HnnY8Q",
+    authDomain: "lfzdemo-c1219.firebaseapp.com",
+    databaseURL: "https://lfzdemo-c1219.firebaseio.com",
+    storageBucket: "lfzdemo-c1219.appspot.com",
+    messagingSenderId: "436706232959"
+};
+firebase.initializeApp(config);
+var fbRef=firebase.database();
 
 function updateDom(d){
     var table = $('.sgt tbody');
@@ -24,7 +33,55 @@ function updateDom(d){
         }
     }
 }
+function addStudentToDatabase(student){
+    console.log(student);
+    var fixed_student={
+        course: student.course,
+        grade: student.grade,
+        student_name: student.sname,
+        student_id: student.sid
+    };
+    fbRef.ref("students").push(fixed_student);
+}
 
+function addStudent(){
+    var new_student=getFormData();
+    addStudentToDatabase(new_student);
+    clearForm();
+}
+
+function removeStudent(key){
+    var confirmation=confirm('Delete this student?');
+    if (confirmation) {
+        fbRef.ref("students/" + key).remove();
+    }
+}
+
+function editStudent(){
+    var addButton = $('#add-student');
+    var student=getRowData($(this).closest('tr'));
+    populateFormData(student.sid, student.sname, student.course, student.grade);
+    console.log(addButton);
+    addButton.removeClass('btn-success');
+    addButton.addClass('btn-primary');
+    addButton.text('Update');
+}
+
+function updateStudent(){
+    var addButton = $('#add-student');
+    var student=getFormData();
+    var key = 'students/' + student.sid;
+    var updates = {};
+    updates['/course']=student.course;
+    updates['/grade']=student.grade;
+    updates['/student_name']=student.sname;
+    updates['/student_id']=student.sid;
+    fbRef.ref(key).update(updates);
+    addButton.removeClass('btn-primary');
+    addButton.addClass('btn-success');
+    addButton.text('Add Student');
+    clearForm();
+}
 function clearForm(){
     $('.sgt-form input').each(function(k, v){
         $(v).val('');
@@ -37,7 +94,6 @@ function getFormData(){
         var ele = $(v);
         output[ele.attr('id')] = ele.val();
     });
-
     return output;
 }
 
@@ -56,3 +112,19 @@ function getRowData(e) {
         grade: e.find('.grade').text()
     };
 }
+$(document).ready(function(){
+    var bodySelector = $('body');
+    bodySelector.on('click','.btn-success',addStudent);
+    bodySelector.on('click','.btn-info',editStudent);
+    bodySelector.on('click','.btn-primary',updateStudent);
+    $(".sgt").on("click",".delete", function(){
+        var key = $(this).closest('td').attr('data-uid');
+        removeStudent(key);
+    });
+
+    $('button#clear-form').click(clearForm);
+    fbRef.ref("students").on("value", function(snapshot){
+        updateDom(snapshot.val());
+        console.log("Snapshot: ", snapshot.val());
+    });
+});
