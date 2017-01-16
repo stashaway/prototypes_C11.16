@@ -86,6 +86,7 @@ function updateStudent(){
     $('#sid').removeAttr('data-uid');
     clearForm();
 }
+
 function clearForm(){
     $('.sgt-form input').each(function(k, v){
         $(v).val('');
