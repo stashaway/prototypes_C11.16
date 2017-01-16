@@ -50,7 +50,8 @@ function addStudent(){
     clearForm();
 }
 
-function removeStudent(key){
+function removeStudent(){
+    var key = $(this).closest('td').attr('data-uid');
     var confirmation=confirm('Delete this student?');
     if (confirmation) {
         fbRef.ref("students/" + key).remove();
@@ -58,9 +59,11 @@ function removeStudent(key){
 }
 
 function editStudent(){
+    var key = $(this).closest('td').attr('data-uid');
     var addButton = $('#add-student');
     var student=getRowData($(this).closest('tr'));
     populateFormData(student.sid, student.sname, student.course, student.grade);
+    $('#sid').attr('data-uid',key);
     console.log(addButton);
     addButton.removeClass('btn-success');
     addButton.addClass('btn-primary');
@@ -69,17 +72,18 @@ function editStudent(){
 
 function updateStudent(){
     var addButton = $('#add-student');
-    var student=getFormData();
-    var key = 'students/' + student.sid;
+    var student = getFormData();
+    var key = $('#sid').attr('data-uid');
     var updates = {};
-    updates['/course']=student.course;
-    updates['/grade']=student.grade;
-    updates['/student_name']=student.sname;
-    updates['/student_id']=student.sid;
-    fbRef.ref(key).update(updates);
+    updates['/course'] = student.course;
+    updates['/grade'] = student.grade;
+    updates['/student_name'] = student.sname;
+    updates['/student_id'] = student.sid;
+    fbRef.ref("students/" + key).update(updates);
     addButton.removeClass('btn-primary');
     addButton.addClass('btn-success');
     addButton.text('Add Student');
+    $('#sid').removeAttr('data-uid');
     clearForm();
 }
 function clearForm(){
@@ -117,14 +121,11 @@ $(document).ready(function(){
     bodySelector.on('click','.btn-success',addStudent);
     bodySelector.on('click','.btn-info',editStudent);
     bodySelector.on('click','.btn-primary',updateStudent);
-    $(".sgt").on("click",".delete", function(){
-        var key = $(this).closest('td').attr('data-uid');
-        removeStudent(key);
-    });
+    $(".sgt").on("click",".delete",removeStudent);
 
     $('button#clear-form').click(clearForm);
     fbRef.ref("students").on("value", function(snapshot){
         updateDom(snapshot.val());
-        console.log("Snapshot: ", snapshot.val());
+        // console.log("Snapshot: ", snapshot.val());
     });
 });
