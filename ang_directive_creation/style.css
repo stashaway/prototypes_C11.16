@@ -4,3 +4,39 @@
     margin-top: 10vh;
     margin-bottom: 5vh;
 }
+footer {
+    bottom: 2px;
+    position: absolute;
+    background-color: lightcyan;
+    width: 80vw;
+    margin: 0 10%;
+    border: 1px solid black;
+    padding: 5px 20px;
+
+}
+footer div {
+    display: inline-block;
+}
+footer div button {
+    height: 30px;
+    background-color: deepskyblue;
+}
+footer div span {
+    display: inline-block;
+}
+
+#owin {
+    right: 5%;
+    position: absolute;
+    bottom: 5px;
+}
+#xwin {
+    right: 30%;
+    position: absolute;
+    bottom: 5px;
+}
+
+#owin span,#xwin span {
+    background-color: indigo;
+    color: white;
+}

@@ -55,3 +55,14 @@ app.directive('displayBoard', function(){
         controllerAs : "gc"
     }
 });
+
+app.directive('displayBar', function(){
+    return {
+        restrict: "E",
+        templateUrl: "info-bar-template.html",
+        controller: function(){
+
+        },
+        controllerAs : "bc"
+    }
+});
